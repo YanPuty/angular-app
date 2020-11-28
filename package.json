@@ -3,9 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open --port 4000",
     "build": "ng build",
     "test": "ng test",
+    "debug": "npm run build-debug && npm run watch-debug && npm run start",
+    "build-debug": "rm -rf dist && npm run build-ts",
+    "build-ts": "tsc && npm run htmlcopy",
+    "htmlcopy": "copyfiles -u 1 \"src/**/*.html\" dist",
+    "watch-debug": "tsc-watch --onSuccess",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -19,7 +24,9 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "copyfiles": "^2.4.1",
     "rxjs": "~6.4.0",
+    "tsc-watch": "^4.2.9",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
